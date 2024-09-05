@@ -1,16 +1,18 @@
 let size;
 let cell;
-var cells;
+let cells;
 let history = [];
+let distance = 1;
 
 let cols;
 let rows;
-var allCells;
+let allCells;
 
-var position;
+let position;
+
 
 function setup() {
-  //frameRate(10);
+  frameRate(10);
   createCanvas(700, 700);
 
   cols = 10;
@@ -23,12 +25,12 @@ function setup() {
   position = createVector(0, 0); //createVector(floor(random(cols)), floor(random(rows)));
 
   cells = [cols];
-  for (var q = 0; q < cols; q++) {
+  for (let q = 0; q < cols; q++) {
     cells[q] = [rows];
   }
 
-  for (var i = 0; i < cols; i++) {
-    for (var j = 0; j < rows; j++) {
+  for (let i = 0; i < cols; i++) {
+    for (let j = 0; j < rows; j++) {
       cell = new Cell();
 
       cell.pos = createVector(i * size, j * size);
@@ -57,16 +59,16 @@ function draw() {
 	}
   
   var maxDistance = 0;
-  for (var i = 0; i < cols; i++) {
-    for (var j = 0; j < rows; j++) {
+  for (let i = 0; i < cols; i++) {
+    for (let j = 0; j < rows; j++) {
       if (cells[i][j].distance > maxDistance) {
         maxDistance = cells[i][j].distance;
       }
     }
   }  
   
-  for (var i = 0; i < cols; i++) {
-    for (var j = 0; j < rows; j++) {
+  for (let i = 0; i < cols; i++) {
+    for (let j = 0; j < rows; j++) {
       cells[i][j].show(size, maxDistance);
     }
   }
@@ -74,25 +76,29 @@ function draw() {
   // textAlign(CENTER, CENTER);
   // fill(150);
   // text("FPS: " + floor(frameRate()), width / 2, height /2);
+  print(history.length)
 }
 
 function maze() {
   cells[position.x][position.y].now = false;
-
+  
   if (move() == true) {
     history.push(cells[position.x][position.y].index)
+    print("push")
 
     cells[position.x][position.y].visited = true;
     cells[position.x][position.y].now = true;
-    cells[position.x][position.y].distance = history.length;
+    // cells[position.x][position.y].distance = history.length;
+    cells[position.x][position.y].distance = distance++;
     allCells--;
   } else {
     let lastIndex = history.pop();
+    print("pop")
     let x = floor(lastIndex % cols);
     let y = floor(lastIndex / cols);
 
     position = createVector(x, y);
-
+    distance = cells[position.x][position.y].distance + 1;
     cells[position.x][position.y].now = true;
     
     if ((position.x == 0) && (position.y == 0)) {

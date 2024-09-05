@@ -23,7 +23,7 @@ class Cell {
       noStroke();
       //fill(255);
       var color = 200 * (this.distance / maxDistance);
-      fill(100, 255 - color, 0);
+      fill(50, 255 - color, 0);
     	rect(this.pos.x + lineSize, this.pos.y + lineSize, size - 2 * lineSize, size - 2 * lineSize);
     	
       noStroke();
