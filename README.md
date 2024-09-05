@@ -19,5 +19,5 @@ JavaScript with P5JS simple maze generator using back-tracing method.
 
 ## Screenshots
 
-![App Screenshot](https://github.com/KonradossX/Maze-Generator/blob/main/Screenshoot.png?raw=true)
+![App Screenshot](https://github.com/KonradossX/Maze-Generator/blob/main/screenshot.png?raw=true)
 
